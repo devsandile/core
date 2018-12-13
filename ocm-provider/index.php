@@ -22,7 +22,7 @@
 require_once __DIR__ . '/../lib/base.php';
 
 $server = \OC::$server;
-
+die('test');
 $isFederationEnabled = $server->getAppManager()
 	->isEnabledForUser('federatedfilesharing');
 if ($isFederationEnabled) {

@@ -30,6 +30,7 @@ namespace OCA\DAV\Connector\Sabre;
 
 use OCA\DAV\DAV\FileCustomPropertiesBackend;
 use OCA\DAV\DAV\FileCustomPropertiesPlugin;
+use OCA\DAV\DAV\SecureViewPlugin;
 use OCA\DAV\Files\BrowserErrorPagePlugin;
 use OCP\Files\Mount\IMountManager;
 use OCP\IConfig;
@@ -161,6 +162,10 @@ class ServerFactory {
 				)
 			);
 			$server->addPlugin(new \OCA\DAV\Connector\Sabre\QuotaPlugin($view));
+
+			$server->addPlugin(new SecureViewPlugin(
+				\OC::$server->getLogger()
+			));
 
 			if ($this->userSession->isLoggedIn()) {
 				$server->addPlugin(new \OCA\DAV\Connector\Sabre\TagsPlugin($objectTree, $this->tagManager));

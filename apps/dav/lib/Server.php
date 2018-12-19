@@ -50,6 +50,7 @@ use OCA\DAV\DAV\FileCustomPropertiesPlugin;
 use OCA\DAV\DAV\LazyOpsPlugin;
 use OCA\DAV\DAV\MiscCustomPropertiesBackend;
 use OCA\DAV\DAV\PublicAuth;
+use OCA\DAV\DAV\SecureViewPlugin;
 use OCA\DAV\Files\BrowserErrorPagePlugin;
 use OCA\DAV\Files\PreviewPlugin;
 use OCA\DAV\JobStatus\Entity\JobStatusMapper;
@@ -185,6 +186,9 @@ class Server {
 
 		$this->server->addPlugin(new CopyEtagHeaderPlugin());
 		$this->server->addPlugin(new ChunkingPlugin());
+		$this->server->addPlugin(new SecureViewPlugin(
+			\OC::$server->getLogger()
+		));
 
 		// Some WebDAV clients do require Class 2 WebDAV support (locking), since
 		// we do not provide locking we emulate it using a fake locking plugin.
